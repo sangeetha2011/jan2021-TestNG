@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -37,9 +38,7 @@ public class LearningTestNg {
 		   e.printStackTrace();
 	   }
 	   
-	   
-	   
-   }
+	  }
    
   	@BeforeMethod
 	public void init() {
@@ -51,7 +50,7 @@ public class LearningTestNg {
 		System.setProperty("webdriver.gecko.driver", "drivers\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		}
-		System.setProperty("webdriver.edge.driver", "drivers\\msedgedriver.exe");	
+		//System.setProperty("webdriver.edge.driver", "drivers\\msedgedriver.exe");	
 				//driver = new EdgeDriver();
 		driver.get(url);
 		driver.manage().window().maximize();
@@ -65,16 +64,56 @@ public class LearningTestNg {
 		 Assert.assertEquals(driver.getTitle(), "Login - iBilling", "wrong page");
 		  WebElement USERNAME_ID = driver.findElement(By.xpath("//input[@id='username']")); WebElement
 		  PASSWORD_ID = driver.findElement(By.xpath("//input[@id='password']"));
-		 WebElement LOGIN_ID =driver.findElement(By.
-		 xpath("//button[@class='btn btn-success block full-width']"));
+		 WebElement LOGIN_ID =driver.findElement(By.xpath("//button[@class='btn btn-success block full-width']"));
 		  
-		  String username="demo@techfios.com"; String password ="abc123";
+		  String username="demo@techfios.com";
+		  String password ="abc123";
 		  
-		 USERNAME_ID.sendKeys(username); PASSWORD_ID.sendKeys(password);
+		 USERNAME_ID.sendKeys(username); 
+		 PASSWORD_ID.sendKeys(password);
 		 LOGIN_ID.click();
 		 WebElement DASHBOARD_ID = driver.findElement(By.xpath(" //h2[contains(text(),' Dashboard ')]"));
 		 //Assert.assertEquals(driver.getTitle(),"Dashboard- iBilling", "wrong page");
 		 Assert.assertEquals(DASHBOARD_ID.getText(),"Dashboard", "wrong page");
+		 
+		 //driver.findElement(By.xpath("//span[contains(text(),'Customers')]")).click();
+		   driver.findElement(By.xpath("//a[contains(text(),'Add Customer')]")).click();
+		    
+		   WebElement CONTACT_ELEMENT = driver.findElement(By.xpath("//h2[contains(text(),' Contacts ')]"));
+			//wait.until(ExpectedConditions.visibilityOf(CONTACT_ELEMENT ));	
+	        //Assert.assertTrue("Contacts page not found",CONTACT_ELEMENT.isDisplayed());
+			Thread.sleep(3000);
+		 
+			driver.findElement(By.xpath("//input[@id='account']")).sendKeys("WilliamSmith");
+		    WebElement COMPANY_ELEMENT = driver.findElement(By.xpath("//select[@id='cid']"));
+		   Select sel = new Select(COMPANY_ELEMENT);
+		   sel.selectByVisibleText("Google");
+		   driver.findElement(By.xpath("//input[@id='email']")).sendKeys("Willsmith2@gmail.com");
+		   driver.findElement(By.xpath("//input[@id='phone']")).sendKeys("1246882637");
+		   driver.findElement(By.xpath("//input[@id='address']")).sendKeys("234,Green Street");
+		   driver.findElement(By.xpath("//input[@id='city']")).sendKeys("Dallas");
+		   driver.findElement(By.xpath("//input[@id='state']")).sendKeys("Texas");
+		   driver.findElement(By.xpath("//input[@id='zip']")).sendKeys("2838");
+		   WebElement COUNTRY_ELEMENT = driver.findElement(By.xpath("//select[@id='country']"));
+		   Select sel1 = new Select ( COUNTRY_ELEMENT);
+		   sel1.selectByVisibleText("United States");
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 		 
 
 	}
